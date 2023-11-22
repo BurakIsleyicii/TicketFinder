@@ -1,0 +1,65 @@
+﻿@using TicketFinder.Models.ViewModels
+@model JourneyListVM
+@{
+    ViewData["Title"] = "Journeys";
+    ViewData["Homepage"] = "Geri";
+}
+
+@if (Model is not null)
+{
+    <div class="d-flex justify-content-center">
+        <div class="col-lg-5 col-xl-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row d-flex justify-content-center">
+                        <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <h5>@Model.Title</h5>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <p>@Model.DateText</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (!Model.Journeys.Any())
+            {
+                <p>Herhangi bir yolculuk bulunamadı.</p>
+            }
+            else
+            {
+                @foreach (var item in Model.Journeys)
+                {
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-8">
+                                    <span>
+                                        @item.DepartureTime
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                                        </svg>
+                                        @item.ArrivalTime
+                                    </span>
+                                </div>
+                                <div class="form-group col-4 text-end">
+                                    <span class="badge bg-danger">@item.Price</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <span>@item.Origin - @item.Destination</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}
+else
+{
+    <p>Herhangi bir yolculuk bulunamadı.</p>
+}
